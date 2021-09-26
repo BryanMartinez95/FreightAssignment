@@ -4,11 +4,12 @@ using Flurl;
 using Flurl.Http.Xml;
 using Models.Quote;
 using Models.Rate;
+using Shared.Models;
 using Shared.Services;
 
 namespace Canpar.Services
 {
-    public class CanparQuoteIntegrationService: IQuoteIntegrationService<CanparQuoteRequest,CanparQuoteResponse>
+    public class CanparQuoteIntegrationService: IQuoteIntegrationService
     {
         private string baseUrl = "http://localhost:7011";
         
@@ -24,12 +25,12 @@ namespace Canpar.Services
             return ConvertResponse(rateResponse);
         }
 
-        public CanparQuoteRequest ConvertRequest(QuoteModel quoteModel)
+        public IQuoteRequest ConvertRequest(QuoteModel quoteModel)
         {
             throw new System.NotImplementedException();
         }
 
-        public RateModel ConvertResponse(CanparQuoteResponse response)
+        public RateModel ConvertResponse(IQuoteResponse response)
         {
             throw new System.NotImplementedException();
         }

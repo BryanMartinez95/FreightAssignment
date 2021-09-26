@@ -5,14 +5,12 @@ using Shared.Models;
 
 namespace Shared.Services
 {
-    public interface IQuoteIntegrationService<out TRequest, in TResponse>
-        where TRequest: IQuoteRequest
-        where TResponse: IQuoteResponse
+    public interface IQuoteIntegrationService
     {
         Task<RateModel> GetRate(QuoteModel quoteModel);
 
-        TRequest ConvertRequest(QuoteModel quoteModel);
+        IQuoteRequest ConvertRequest(QuoteModel quoteModel);
 
-        RateModel ConvertResponse(TResponse response);
+        RateModel ConvertResponse(IQuoteResponse response);
     }
 }

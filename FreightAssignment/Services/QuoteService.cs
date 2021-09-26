@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Base.Factories;
 using Models.ApiIntegration;
 using Models.Quote;
 using Models.Rate;
-using Base.Resolvers;
 
 namespace FreightAssignment.Services
 {
     public class QuoteService : IQuoteService
     {
-        private readonly IQuoteIntegrationResolver _quoteIntegrationResolver;
-        public QuoteService(IQuoteIntegrationResolver quoteIntegrationResolver)
+        private readonly IQuoteIntegrationFactory _quoteIntegrationFactory;
+        public QuoteService(IQuoteIntegrationFactory quoteIntegrationFactory)
         {
-            _quoteIntegrationResolver = quoteIntegrationResolver;
+            _quoteIntegrationFactory = quoteIntegrationFactory;
         }
         
         public async Task<List<RateModel>> Quote(QuoteModel quoteModel)
@@ -33,7 +33,7 @@ namespace FreightAssignment.Services
             
             foreach (var partner in Enum.GetValues(typeof(IntegrationPartner)))
             {
-                var service = _quoteIntegrationResolver.Resolve((IntegrationPartner)partner);
+                var service = _quoteIntegrationFactory.Resolve((IntegrationPartner)partner);
                 rates.Add(await service.GetRate(quoteModel));
             }
 
