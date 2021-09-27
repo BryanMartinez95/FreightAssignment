@@ -11,6 +11,6 @@ namespace Shared.Services
 
         IQuoteRequest ConvertRequest(QuoteModel quoteModel);
 
-        RateModel ConvertResponse(IQuoteResponse response);
+        RateModel ConvertResponse(IRateResponse response);
     }
 }

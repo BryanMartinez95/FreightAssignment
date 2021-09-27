@@ -16,11 +16,12 @@ namespace FreightAssignment.Controllers
         {
             _quoteService = quoteService;
         }
-        // GET
+        
+        
         [HttpGet]
         public Task<List<RateModel>> Quote()
         {
-            return _quoteService.Quote(new QuoteModel());
+            return _quoteService.GetRates(new QuoteModel());
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using Canpar.Services;
-using Models.ApiIntegration;    
+using Fedex.Services;
+using Models.ApiIntegration;
+using Purolator.Services;
 using Shared.Services;
 
 namespace Base.Factories
@@ -9,16 +11,13 @@ namespace Base.Factories
     {
         public IQuoteIntegrationService Resolve(IntegrationPartner partner)
         {
-            switch (partner)
+            return partner switch
             {
-                case IntegrationPartner.Canpar:
-                case IntegrationPartner.Fedex:
-                case IntegrationPartner.Purolator:
-                    return new CanparQuoteIntegrationService();
-                default:
-                    throw new Exception("Integration Partner Not Registered");
-                
-            }
+                IntegrationPartner.Canpar => new CanparQuoteIntegrationService(),
+                IntegrationPartner.Fedex => new FedexQuoteIntegrationService(),
+                IntegrationPartner.Purolator => new PurolatorQuoteIntegrationService(),
+                _ => throw new Exception("Integration Partner Not Registered")
+            };
         }
         
     }

@@ -1,6 +1,6 @@
 ﻿namespace Shared.Models
 {
-    public interface IQuoteResponse
+    public interface IRateResponse
     {
         
     }

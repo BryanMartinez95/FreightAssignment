@@ -20,7 +20,7 @@ namespace Canpar.Services
             var rateResponse = await baseUrl
                 .AppendPathSegment("quote")
                 .PostXmlAsync(quoteRequest)
-                .ReceiveXml<CanparQuoteResponse>();
+                .ReceiveXml<CanparRateResponse>();
             
             return ConvertResponse(rateResponse);
         }
@@ -30,7 +30,7 @@ namespace Canpar.Services
             throw new System.NotImplementedException();
         }
 
-        public RateModel ConvertResponse(IQuoteResponse response)
+        public RateModel ConvertResponse(IRateResponse response)
         {
             throw new System.NotImplementedException();
         }

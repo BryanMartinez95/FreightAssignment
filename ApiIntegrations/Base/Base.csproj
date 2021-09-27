@@ -6,6 +6,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Canpar\Canpar.csproj" />
+      <ProjectReference Include="..\Fedex\Fedex.csproj" />
+      <ProjectReference Include="..\Purolator\Purolator.csproj" />
       <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 

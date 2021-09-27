@@ -2,7 +2,7 @@
 
 namespace Canpar.Models
 {
-    public class CanparQuoteResponse: IQuoteResponse
+    public class CanparRateResponse: IRateResponse
     {
         
     }
