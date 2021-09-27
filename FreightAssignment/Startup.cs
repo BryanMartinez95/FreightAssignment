@@ -1,4 +1,7 @@
 
+using System;
+using System.IO;
+using System.Reflection;
 using Base.Factories;
 using FreightAssignment.Services;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +31,13 @@ namespace FreightAssignment
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "FreightAssignment", Version = "v1"});
+                
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

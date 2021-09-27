@@ -18,16 +18,16 @@ namespace FreightAssignment.Services
         
         public async Task<List<RateModel>> GetRates(QuoteModel quoteModel)
         {
-            quoteModel = new QuoteModel
-            {
-                SourceAddress = "123 abc street",
-                DestinationAddress = "456 cbc street",
-                Cartons = new List<string>
-                {
-                    "Package 1",
-                    "Package 2"
-                }
-            };
+            // quoteModel = new QuoteModel
+            // {
+            //     SourceAddress = "123 abc street",
+            //     DestinationAddress = "456 cbc street",
+            //     Cartons = new List<string>
+            //     {
+            //         "Package 1",
+            //         "Package 2"
+            //     }
+            // };
 
             var rates = new List<RateModel>();
             
@@ -41,16 +41,16 @@ namespace FreightAssignment.Services
         }
         public async Task<RateModel> GetRate(IntegrationPartner partner,QuoteModel quoteModel)
         {
-            quoteModel = new QuoteModel
-            {
-                SourceAddress = "123 abc street",
-                DestinationAddress = "456 cbc street",
-                Cartons = new List<string>
-                {
-                    "Package 1",
-                    "Package 2"
-                }
-            };
+            // quoteModel = new QuoteModel
+            // {
+            //     SourceAddress = "123 abc street",
+            //     DestinationAddress = "456 cbc street",
+            //     Cartons = new List<string>
+            //     {
+            //         "Package 1",
+            //         "Package 2"
+            //     }
+            // };
             
             var service = _quoteIntegrationFactory.Resolve(partner);
             return await service.GetRate(quoteModel);

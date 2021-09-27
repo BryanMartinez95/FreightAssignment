@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
-using Fedex.Models;
-using Fedex.Services;
 using Models.ApiIntegration;
 using Models.Quote;
 using NUnit.Framework;
+using Purolator.Models;
+using Purolator.Services;
 
-namespace FedexUnitTests.Services
+namespace PurolatorUnitTests.Services
 {
-    public class FedexQuoteIntegrationServiceTests
+    public class PurolatorQuoteIntegrationServiceTests
     {
-        private FedexQuoteIntegrationService _sut;
+        private PurolatorQuoteIntegrationService _sut;
         [SetUp]
         public void Setup()
         {
-            _sut = new FedexQuoteIntegrationService();
+            _sut = new PurolatorQuoteIntegrationService();
 
         }
 
         [TestFixture]
-        public class ConvertRequestTests : FedexQuoteIntegrationServiceTests
+        public class ConvertRequestTests : PurolatorQuoteIntegrationServiceTests
         {
             private QuoteModel _quoteModel;
             [OneTimeSetUp]
@@ -52,25 +52,25 @@ namespace FedexUnitTests.Services
             [Test]
             public void TestConvertResponseMapping()
             {
-                FedexQuoteRequest quoteRequest = (FedexQuoteRequest)_sut.ConvertRequest(_quoteModel);
+                PurolatorQuoteRequest quoteRequest = (PurolatorQuoteRequest)_sut.ConvertRequest(_quoteModel);
                 
-                Assert.AreEqual(_quoteModel.SourceAddress, quoteRequest.Consignee);
-                Assert.AreEqual(_quoteModel.DestinationAddress, quoteRequest.Consignor);
-                Assert.AreEqual(_quoteModel.Cartons.Count, quoteRequest.Cartons.Count);
+                Assert.AreEqual(_quoteModel.SourceAddress, quoteRequest.WarehouseAddress);
+                Assert.AreEqual(_quoteModel.DestinationAddress, quoteRequest.ContactAddress);
+                Assert.AreEqual(_quoteModel.Cartons.Count, quoteRequest.PackageDimensions.Count);
             }   
 
         }
         
         [TestFixture]
-        public class ConvertResponseTests : FedexQuoteIntegrationServiceTests
+        public class ConvertResponseTests : PurolatorQuoteIntegrationServiceTests
         {
-            private FedexRateResponse _rateResponse;
+            private PurolatorRateResponse _rateResponse;
             [OneTimeSetUp]
             public void SetUpFixture()
             {
-                _rateResponse = new FedexRateResponse
+                _rateResponse = new PurolatorRateResponse
                 {
-                    Amount = 10
+                    Total = 10
                 };
             }
             
@@ -91,8 +91,8 @@ namespace FedexUnitTests.Services
             public void TestConvertResponseMapping()
             {
                 var rateModel = _sut.ConvertResponse(_rateResponse);
-                Assert.AreEqual(_rateResponse.Amount, rateModel.Rate);
-                Assert.AreEqual(IntegrationPartner.Fedex.ToString(), rateModel.Name);
+                Assert.AreEqual(_rateResponse.Total, rateModel.Rate);
+                Assert.AreEqual(IntegrationPartner.Purolator.ToString(), rateModel.Name);
             }   
             
         }

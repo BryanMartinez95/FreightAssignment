@@ -20,8 +20,8 @@ namespace Purolator.Services
         {
             return new PurolatorQuoteRequest
             {
-                ContactAddress = quoteModel.SourceAddress,
-                WarehouseAddress = quoteModel.DestinationAddress,
+                ContactAddress = quoteModel.DestinationAddress,
+                WarehouseAddress = quoteModel.SourceAddress,
                 PackageDimensions = quoteModel.Cartons
             };
         }
