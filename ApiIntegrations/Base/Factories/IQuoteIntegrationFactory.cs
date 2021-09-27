@@ -6,6 +6,6 @@ namespace Base.Factories
 {
     public interface IQuoteIntegrationFactory
     {
-        IQuoteIntegrationService Resolve(IntegrationPartner partner);
+        QuoteIntegrationService Resolve(IntegrationPartner partner);
     }
 }

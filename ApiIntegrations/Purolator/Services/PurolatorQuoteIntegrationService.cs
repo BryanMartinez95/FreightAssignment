@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using Microsoft.Extensions.Logging;
 using Models.ApiIntegration;
 using Models.Quote;
 using Models.Rate;
@@ -10,19 +11,12 @@ using Shared.Services;
 
 namespace Purolator.Services
 {
-    public class PurolatorQuoteIntegrationService: IQuoteIntegrationService
+    public class PurolatorQuoteIntegrationService: QuoteIntegrationService
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private string baseUrl = "http://localhost:7013";
-        public async Task<RateModel> GetRate(QuoteModel quoteModel)
-        {
-            var quoteRequest = ConvertRequest(quoteModel);
-            
-            var rateResponse = await SendRequest(quoteRequest);
-            
-            return ConvertResponse(rateResponse);
-        }
 
-        public IQuoteRequest ConvertRequest(QuoteModel quoteModel)
+        public override IQuoteRequest ConvertRequest(QuoteModel quoteModel)
         {
             return new PurolatorQuoteRequest
             {
@@ -32,7 +26,7 @@ namespace Purolator.Services
             };
         }
 
-        public RateModel ConvertResponse(IRateResponse response)
+        public override RateModel ConvertResponse(IRateResponse response)
         {
             var canparResponse = (PurolatorRateResponse)response;
             
@@ -43,7 +37,7 @@ namespace Purolator.Services
             };
         }
 
-        public async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
+        protected override async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
         {
             return await baseUrl
                 .AppendPathSegment("quote")
@@ -51,11 +45,11 @@ namespace Purolator.Services
                 .PostJsonAsync(quoteRequest)
                 .ReceiveJson<PurolatorRateResponse>();
         }
-        
-        public IntegrationPartner GetIntegrationPartner()
+
+        protected override IntegrationPartner GetIntegrationPartner()
         {
             return IntegrationPartner.Purolator;
         }
-
+        
     }
 }

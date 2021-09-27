@@ -9,7 +9,7 @@ namespace Base.Factories
 {
     public class QuoteIntegrationFactory : IQuoteIntegrationFactory
     {
-        public IQuoteIntegrationService Resolve(IntegrationPartner partner)
+        public QuoteIntegrationService Resolve(IntegrationPartner partner)
         {
             return partner switch
             {

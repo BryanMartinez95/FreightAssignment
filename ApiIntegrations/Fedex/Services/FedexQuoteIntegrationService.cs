@@ -10,24 +10,16 @@ using Shared.Services;
 
 namespace Fedex.Services
 {
-    public class FedexQuoteIntegrationService: IQuoteIntegrationService
+    public class FedexQuoteIntegrationService: QuoteIntegrationService
     {
         private string baseUrl = "http://localhost:7012";
-        public IntegrationPartner GetIntegrationPartner()
+
+        protected override IntegrationPartner GetIntegrationPartner()
         {
             return IntegrationPartner.Fedex;
         }
-
-        public async Task<RateModel> GetRate(QuoteModel quoteModel)
-        {
-            var quoteRequest = ConvertRequest(quoteModel);
-            
-            var rateResponse = await SendRequest(quoteRequest);
-            
-            return ConvertResponse(rateResponse);
-        }
-
-        public IQuoteRequest ConvertRequest(QuoteModel quoteModel)
+        
+        public override IQuoteRequest ConvertRequest(QuoteModel quoteModel)
         {
             return new FedexQuoteRequest
             {
@@ -37,7 +29,7 @@ namespace Fedex.Services
             };
         }
 
-        public RateModel ConvertResponse(IRateResponse response)
+        public override RateModel ConvertResponse(IRateResponse response)
         {
             var canparResponse = (FedexRateResponse)response;
             
@@ -48,7 +40,7 @@ namespace Fedex.Services
             };
         }
 
-        public async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
+        protected override async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
         {
             return await baseUrl
                 .AppendPathSegment("quote")

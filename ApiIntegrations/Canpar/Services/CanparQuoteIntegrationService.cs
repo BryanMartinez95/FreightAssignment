@@ -12,20 +12,11 @@ using Shared.Services;
 
 namespace Canpar.Services
 {
-    public class CanparQuoteIntegrationService: IQuoteIntegrationService
+    public class CanparQuoteIntegrationService: QuoteIntegrationService
     {
         private string baseUrl = "http://localhost:7011";
-        
-        public async Task<RateModel> GetRate(QuoteModel quoteModel)
-        {
-            var quoteRequest = ConvertRequest(quoteModel);
-            
-            var rateResponse = await SendRequest(quoteRequest);
-            
-            return ConvertResponse(rateResponse);
-        }
 
-        public async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
+        protected override async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
         {
             return await baseUrl
                 .AppendPathSegment("quote")
@@ -34,7 +25,7 @@ namespace Canpar.Services
                 .ReceiveXml<CanparRateResponse>();
         }
 
-        public IQuoteRequest ConvertRequest(QuoteModel quoteModel)
+        public override IQuoteRequest ConvertRequest(QuoteModel quoteModel)
         {
             return new CanparQuoteRequest
             {
@@ -43,8 +34,8 @@ namespace Canpar.Services
                 Packages = quoteModel.Cartons
             };
         }
-        
-        public RateModel ConvertResponse(IRateResponse response)
+
+        public override RateModel ConvertResponse(IRateResponse response)
         {
             var canparResponse = (CanparRateResponse)response;
             
@@ -55,7 +46,7 @@ namespace Canpar.Services
             };
         }
 
-        public IntegrationPartner GetIntegrationPartner()
+        protected override IntegrationPartner GetIntegrationPartner()
         {
             return IntegrationPartner.Canpar;
         }
