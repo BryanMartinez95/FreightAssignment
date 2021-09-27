@@ -52,6 +52,7 @@ namespace Fedex.Services
         {
             return await baseUrl
                 .AppendPathSegment("quote")
+                .AppendPathSegment("ShippingQuote")
                 .PostJsonAsync(quoteRequest)
                 .ReceiveJson<FedexRateResponse>();
         }

@@ -29,6 +29,7 @@ namespace Canpar.Services
         {
             return await baseUrl
                 .AppendPathSegment("quote")
+                .AppendPathSegment("quote")
                 .PostXmlAsync(quoteRequest)
                 .ReceiveXml<CanparRateResponse>();
         }

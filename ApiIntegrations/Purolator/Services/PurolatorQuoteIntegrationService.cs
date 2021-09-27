@@ -47,6 +47,7 @@ namespace Purolator.Services
         {
             return await baseUrl
                 .AppendPathSegment("quote")
+                .AppendPathSegment("TransportationCost")
                 .PostJsonAsync(quoteRequest)
                 .ReceiveJson<PurolatorRateResponse>();
         }
