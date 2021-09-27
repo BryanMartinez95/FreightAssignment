@@ -14,6 +14,7 @@ View & Test available APIs once project is running `https://localhost:5001/swagg
 Unit Tests the back end are done with NUnit in 
 - [API Integration Tests](https://github.com/BryanMartinez95/FreightAssignment/tree/main/ApiIntegrations/tests)
 - [FreightAssignment Tests](https://github.com/BryanMartinez95/FreightAssignment/tree/main/tests/FreightAssignmentTests)
+
 Unit Tests can be done via Visual Studio or with CLI `dotnet test`.
 
 
