@@ -13,7 +13,6 @@ namespace Purolator.Services
 {
     public class PurolatorQuoteIntegrationService: QuoteIntegrationService
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private string baseUrl = "http://localhost:7013";
 
         public override IQuoteRequest ConvertRequest(QuoteModel quoteModel)
