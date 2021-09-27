@@ -18,6 +18,17 @@ Unit Tests the back end are done with NUnit in
 Unit Tests can be done via Visual Studio or with CLI `dotnet test`.
 
 
+## Core Project Structure
+```
+
+├── APIIntegrations                   # Everything related to external API communications live here
+│   ├── tests  
+│   ├── Base                          # Factories used to implement the API Integrations
+│   ├── Shared                        # Shared Interfaces, helpers, classes for API Integrations
+├── FreightAssignment                 # Main Backend API for the project
+├── test/FreightAssignmentTests       # Unit/Integration tests for FreightAssignmentProject
+├── Models                            # Models that are shared throughout the project
+```
  
 ## Built With
 - [ASP.NET Core 5.0](https://dotnet.microsoft.com/download/dotnet/5.0) Back End API
