@@ -1,4 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Fedex.Models;
+using Flurl;
+using Flurl.Http;
+using Models.ApiIntegration;
 using Models.Quote;
 using Models.Rate;
 using Shared.Models;
@@ -8,19 +12,48 @@ namespace Fedex.Services
 {
     public class FedexQuoteIntegrationService: IQuoteIntegrationService
     {
-        public Task<RateModel> GetRate(QuoteModel quoteModel)
+        private string baseUrl = "http://localhost:7011";
+        public IntegrationPartner GetIntegrationPartner()
         {
-            throw new System.NotImplementedException();
+            return IntegrationPartner.Fedex;
+        }
+
+        public async Task<RateModel> GetRate(QuoteModel quoteModel)
+        {
+            var quoteRequest = ConvertRequest(quoteModel);
+            
+            var rateResponse = await SendRequest(quoteRequest);
+            
+            return ConvertResponse(rateResponse);
         }
 
         public IQuoteRequest ConvertRequest(QuoteModel quoteModel)
         {
-            throw new System.NotImplementedException();
+            return new FedexQuoteRequest
+            {
+                Consignee = quoteModel.SourceAddress,
+                Consignor = quoteModel.DestinationAddress,
+                Cartons = quoteModel.Cartons
+            };
         }
 
         public RateModel ConvertResponse(IRateResponse response)
         {
-            throw new System.NotImplementedException();
+            var canparResponse = (FedexRateResponse)response;
+            
+            return new RateModel
+            {
+                Name = GetIntegrationPartner().ToString(),
+                Rate = canparResponse.Amount
+            };
+        }
+
+        public async Task<IRateResponse> SendRequest(IQuoteRequest quoteRequest)
+        {
+            return await baseUrl
+                .AppendPathSegment("quote")
+                .PostJsonAsync(quoteRequest)
+                .ReceiveJson<FedexRateResponse>();
         }
     }
 }

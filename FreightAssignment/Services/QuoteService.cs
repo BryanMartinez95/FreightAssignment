@@ -22,10 +22,10 @@ namespace FreightAssignment.Services
             {
                 SourceAddress = "123 abc street",
                 DestinationAddress = "456 cbc street",
-                Cartons = new List<CartonModel>
+                Cartons = new List<string>
                 {
-                    new CartonModel { Height = 100, Length = 100, Width = 100, Weight = 100 },
-                    new CartonModel { Height = 200, Length = 200, Width = 200, Weight = 200 }
+                    "Package 1",
+                    "Package 2"
                 }
             };
 
@@ -45,10 +45,10 @@ namespace FreightAssignment.Services
             {
                 SourceAddress = "123 abc street",
                 DestinationAddress = "456 cbc street",
-                Cartons = new List<CartonModel>
+                Cartons = new List<string>
                 {
-                    new CartonModel { Height = 100, Length = 100, Width = 100, Weight = 100 },
-                    new CartonModel { Height = 200, Length = 200, Width = 200, Weight = 200 }
+                    "Package 1",
+                    "Package 2"
                 }
             };
             

@@ -6,6 +6,6 @@ namespace Models.Quote
     {
         public string SourceAddress { get; set; }
         public string DestinationAddress { get; set; }
-        public List<CartonModel> Cartons { get; set; }
+        public List<string> Cartons { get; set; }
     }
 }
