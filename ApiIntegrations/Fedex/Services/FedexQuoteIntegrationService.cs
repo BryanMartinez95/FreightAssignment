@@ -12,7 +12,7 @@ namespace Fedex.Services
 {
     public class FedexQuoteIntegrationService: IQuoteIntegrationService
     {
-        private string baseUrl = "http://localhost:7011";
+        private string baseUrl = "http://localhost:7012";
         public IntegrationPartner GetIntegrationPartner()
         {
             return IntegrationPartner.Fedex;

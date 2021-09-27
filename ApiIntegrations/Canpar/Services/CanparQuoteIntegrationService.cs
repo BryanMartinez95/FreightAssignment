@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Canpar.Models;
 using Flurl;
+using Flurl.Http;
 using Flurl.Http.Xml;
 using Models.ApiIntegration;
 using Models.Quote;
@@ -12,7 +14,7 @@ namespace Canpar.Services
 {
     public class CanparQuoteIntegrationService: IQuoteIntegrationService
     {
-        private string baseUrl = "http://localhost:7012";
+        private string baseUrl = "http://localhost:7011";
         
         public async Task<RateModel> GetRate(QuoteModel quoteModel)
         {
