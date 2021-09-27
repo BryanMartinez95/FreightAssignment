@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace FedexUnitTests.Services
 {
+    [TestFixture]
     public class FedexQuoteIntegrationServiceTests
     {
         private FedexQuoteIntegrationService _sut;

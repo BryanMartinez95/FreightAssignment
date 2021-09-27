@@ -4,6 +4,7 @@
     {
         Canpar,
         Fedex,
-        Purolator
+        Purolator,
+        Dhl
     }
 }

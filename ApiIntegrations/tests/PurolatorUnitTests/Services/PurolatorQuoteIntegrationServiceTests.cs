@@ -7,6 +7,7 @@ using Purolator.Services;
 
 namespace PurolatorUnitTests.Services
 {
+    [TestFixture]
     public class PurolatorQuoteIntegrationServiceTests
     {
         private PurolatorQuoteIntegrationService _sut;

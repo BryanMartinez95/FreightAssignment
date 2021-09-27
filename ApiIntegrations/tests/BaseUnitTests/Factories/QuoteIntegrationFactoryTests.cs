@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace BaseUnitTests.Factories
 {
+    [TestFixture]
     public class QuoteIntegrationFactoryTests
     {
         private QuoteIntegrationFactory _sut;

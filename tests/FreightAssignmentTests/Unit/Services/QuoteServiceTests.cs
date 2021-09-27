@@ -5,8 +5,9 @@ using Models.ApiIntegration;
 using Models.Rate;
 using NUnit.Framework;
 
-namespace FreightAssignmentTests.Services
+namespace FreightAssignmentTests.Unit.Services
 {
+    [TestFixture]
     public class QuoteServiceTests
     {
         private QuoteService _sut;

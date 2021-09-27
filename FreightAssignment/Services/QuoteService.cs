@@ -24,6 +24,11 @@ namespace FreightAssignment.Services
             foreach (var partner in Enum.GetValues(typeof(IntegrationPartner)))
             {
                 var service = _quoteIntegrationFactory.Resolve((IntegrationPartner)partner);
+
+                if (service == null)
+                {
+                    continue;
+                }
                 
                 RateModel rate = await service.GetRate(quoteModel);
                 
@@ -39,6 +44,10 @@ namespace FreightAssignment.Services
         public async Task<RateModel> QuotePartner(IntegrationPartner partner,QuoteModel quoteModel)
         {
             var service = _quoteIntegrationFactory.Resolve(partner);
+            if (service == null)
+            {
+                return EmptyRate();
+            }
             return await service.GetRate(quoteModel);
         }
 
@@ -46,14 +55,19 @@ namespace FreightAssignment.Services
         {
             if (rates == null || !rates.Any())
             {
-                return new RateModel
-                {
-                    Name = "N/A",
-                    Rate = 0
-                };
+                return EmptyRate();
             }
             
             return rates.OrderBy(x => x.Rate).FirstOrDefault();
+        }
+
+        private RateModel EmptyRate()
+        {
+            return new RateModel
+            {
+                Name = "N/A",
+                Rate = 0
+            };
         }
     }
 

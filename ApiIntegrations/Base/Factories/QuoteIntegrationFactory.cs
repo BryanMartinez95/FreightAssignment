@@ -9,15 +9,22 @@ namespace Base.Factories
 {
     public class QuoteIntegrationFactory : IQuoteIntegrationFactory
     {
+        protected static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        
         public QuoteIntegrationService Resolve(IntegrationPartner partner)
         {
-            return partner switch
+            switch (partner)
             {
-                IntegrationPartner.Canpar => new CanparQuoteIntegrationService(),
-                IntegrationPartner.Fedex => new FedexQuoteIntegrationService(),
-                IntegrationPartner.Purolator => new PurolatorQuoteIntegrationService(),
-                _ => throw new Exception("Integration Partner Not Registered")
-            };
+                case IntegrationPartner.Canpar:
+                   return new CanparQuoteIntegrationService();
+                case IntegrationPartner.Fedex:
+                    return new FedexQuoteIntegrationService();
+                case IntegrationPartner.Purolator:
+                    return new PurolatorQuoteIntegrationService();
+                default:
+                    Logger.Warn($"{partner.ToString()} not registered for QuoteIntegrationFactory");
+                    return null;
+            }
         }
         
     }

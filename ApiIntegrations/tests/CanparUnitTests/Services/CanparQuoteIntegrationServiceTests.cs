@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace CanparUnitTests.Services
 {
+    [TestFixture]
     public class CanparQuoteIntegrationServiceTests
     {
         private CanparQuoteIntegrationService _sut;
