@@ -14,8 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Models\Models.csproj" />
-      <ProjectReference Include="..\Purolator\Purolator.csproj" />
+      <ProjectReference Include="..\..\..\Models\Models.csproj" />
+      <ProjectReference Include="..\..\Fedex\Fedex.csproj" />
     </ItemGroup>
 
 </Project>

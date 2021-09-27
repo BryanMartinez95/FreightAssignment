@@ -14,7 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Fedex\Fedex.csproj" />
+      <ProjectReference Include="..\..\..\Models\Models.csproj" />
+      <ProjectReference Include="..\..\Canpar\Canpar.csproj" />
     </ItemGroup>
 
 </Project>

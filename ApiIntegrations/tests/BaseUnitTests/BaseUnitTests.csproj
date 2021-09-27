@@ -14,8 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Models\Models.csproj" />
-      <ProjectReference Include="..\Canpar\Canpar.csproj" />
+      <ProjectReference Include="..\..\Base\Base.csproj" />
     </ItemGroup>
 
 </Project>
