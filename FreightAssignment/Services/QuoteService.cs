@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Base.Factories;
 using Models.ApiIntegration;
@@ -16,22 +17,43 @@ namespace FreightAssignment.Services
             _quoteIntegrationFactory = quoteIntegrationFactory;
         }
         
-        public async Task<List<RateModel>> GetRates(QuoteModel quoteModel)
+        public async Task<RateModel> QuotePartners(QuoteModel quoteModel)
         {
             var rates = new List<RateModel>();
             
             foreach (var partner in Enum.GetValues(typeof(IntegrationPartner)))
             {
                 var service = _quoteIntegrationFactory.Resolve((IntegrationPartner)partner);
-                rates.Add(await service.GetRate(quoteModel));
+                
+                RateModel rate = await service.GetRate(quoteModel);
+                
+                if (rate != null)
+                {
+                    rates.Add(rate);    
+                }
+                
             }
-
-            return rates;
+            
+            return GetCheapestRate(rates);
         }
-        public async Task<RateModel> GetRate(IntegrationPartner partner,QuoteModel quoteModel)
+        public async Task<RateModel> QuotePartner(IntegrationPartner partner,QuoteModel quoteModel)
         {
             var service = _quoteIntegrationFactory.Resolve(partner);
             return await service.GetRate(quoteModel);
+        }
+
+        public RateModel GetCheapestRate(List<RateModel> rates)
+        {
+            if (rates == null || !rates.Any())
+            {
+                return new RateModel
+                {
+                    Name = "N/A",
+                    Rate = 0
+                };
+            }
+            
+            return rates.OrderBy(x => x.Rate).FirstOrDefault();
         }
     }
 

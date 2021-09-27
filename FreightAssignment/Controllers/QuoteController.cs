@@ -23,7 +23,7 @@ namespace FreightAssignment.Controllers
         
         
         /// <summary>
-        /// Quotes Integrated Partners for shipping costs
+        /// Quotes all integrated partners and returns cheapest rate
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -39,11 +39,11 @@ namespace FreightAssignment.Controllers
         /// <returns> A list of Rates</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [Route("GetQuotes")]
-        public async Task<IActionResult> GetQuotes(QuoteModel quoteModel)
+        [Route("QuotePartners")]
+        public async Task<IActionResult> QuotePartners(QuoteModel quoteModel)
         {
             
-            return Ok(await _quoteService.GetRates(quoteModel));
+            return Ok(await _quoteService.QuotePartners(quoteModel));
         }
 
 
@@ -65,11 +65,11 @@ namespace FreightAssignment.Controllers
         /// <returns>Shipping Rate</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [Route("GetQuote")]
-        public async Task<IActionResult> GetQuote(IntegrationPartner partner,QuoteModel quoteModel)
+        [Route("QuotePartner")]
+        public async Task<IActionResult> QuotePartner(IntegrationPartner partner,QuoteModel quoteModel)
         {
             
-            return Ok(await _quoteService.GetRate(partner, quoteModel));
+            return Ok(await _quoteService.QuotePartner(partner, quoteModel));
         }
     }
 }

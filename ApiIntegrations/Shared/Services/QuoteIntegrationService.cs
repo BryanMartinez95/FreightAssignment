@@ -23,7 +23,7 @@ namespace Shared.Services
             }
             catch (Exception e)
             {
-                Logger.Error($"{GetIntegrationPartner()} REQUEST FAILED");
+                Logger.Error($"{GetIntegrationPartner()} REQUEST FAILED - {e.Message}");
                 return null;
             }
         }

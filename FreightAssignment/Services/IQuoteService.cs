@@ -8,7 +8,7 @@ namespace FreightAssignment.Services
 {
     public interface IQuoteService
     {
-        Task<List<RateModel>> GetRates(QuoteModel quoteModel);
-        Task<RateModel> GetRate(IntegrationPartner partner, QuoteModel quoteModel);
+        Task<RateModel> QuotePartners(QuoteModel quoteModel);
+        Task<RateModel> QuotePartner(IntegrationPartner partner, QuoteModel quoteModel);
     }
 }
