@@ -21,16 +21,16 @@ Unit Tests can be done via Visual Studio or with CLI `dotnet test`.
 ## Core Project Structure
 ```
 
-├── APIIntegrations                   # Everything related to external API communications live here
+├── APIIntegrations                 # Everything related to external API communications live here
 │   ├── tests                         # Unit Tests for each of the API Integrations
 │   ├── Base                          # Factories used to implement the API Integrations
 │   ├── Shared                        # Shared Interfaces, helpers, classes for API Integrations
 │   ├── Canpar                        # Canpar Integration project (XML)
 │   ├── Purolator                     # Purolator Integration project (JSON)
 │   ├── Fedex                         # Fedex Integration project (JSON)
-├── FreightAssignment                 # Main Backend API for the project
-├── test/FreightAssignmentTests       # Unit/Integration tests for FreightAssignmentProject
-├── Models                            # Models that are shared throughout the project
+├── FreightAssignment               # Main Backend API for the project
+├── test/FreightAssignmentTests     # Unit/Integration tests for FreightAssignmentProject
+├── Models                          # Models that are shared throughout the project
 ```
  
 ## Built With
